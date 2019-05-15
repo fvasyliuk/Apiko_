@@ -9,17 +9,17 @@ import Register from '../Register/Register';
 import Api from '../../api';
 
 
-function Auth(){
-    return(
+function Auth({ location }){
+    if (location.pathname !== routes.register && location.pathname !== routes.login) {
+        return <Redirect to={routes.login} />
+    }
+    return(        
         <div className={s.container}>
-            <Header light />
-                        
+            <Header light />                        
             <Switch>               
                 <Route path={routes.login} component={Login} />
                 <Route path={routes.register} component={Register} />
-            </Switch>
-            
-            
+            </Switch>  
         </div>
     );
 }

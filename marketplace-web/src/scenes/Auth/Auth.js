@@ -10,15 +10,14 @@ import Api from '../../api';
 
 
 function Auth({ location }){
-    if (location.pathname !== routes.register && location.pathname !== routes.login) {
-        return <Redirect to={routes.login} />
-    }
+    
     return(        
         <div className={s.container}>
             <Header light />                        
             <Switch>               
-                <Route path={routes.login} component={Login} />
-                <Route path={routes.register} component={Register} />
+                <Route exact path={routes.login} component={Login} />
+                <Route exact path={routes.register} component={Register} />
+                <Redirect to={routes.login} />
             </Switch>  
         </div>
     );

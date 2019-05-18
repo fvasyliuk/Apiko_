@@ -9,7 +9,7 @@ import Register from '../Register/Register';
 import Api from '../../api';
 
 
-function Auth({ location }){
+function Auth(){
     
     return(        
         <div className={s.container}>

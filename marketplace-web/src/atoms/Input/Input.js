@@ -8,7 +8,7 @@ function Input({name , ...props}){
     return(       
         <div className={s.container} onClick={()=>textInput.current.focus()}>
             <Icon className={s.icon} name={name} />
-            <input ariaHidden className={s.input} ref={textInput} {...props} />
+            <input  className={s.input} ref={textInput} {...props} />
         </div>                            
     );
 }

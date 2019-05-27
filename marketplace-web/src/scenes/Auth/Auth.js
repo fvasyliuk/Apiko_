@@ -4,8 +4,8 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import s from './Auth.module.scss';
 import { Header } from '../../components';
 import { routes } from '../router';
-import Login from '../Login/Login';
-import Register from '../Register/Register';
+import Login from '../Login/LoginContainer';
+import Register from '../Register/RegisterContainer';
 import Api from '../../api';
 
 

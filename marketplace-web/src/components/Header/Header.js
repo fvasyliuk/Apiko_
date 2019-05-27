@@ -2,14 +2,13 @@ import React from 'react';
 import T from 'prop-types';
 import s from './Header.module.scss';
 import {routes} from '../../scenes/router';
-import { Link, withRouter } from 'react-router-dom';
-import { compose, withHandlers } from 'recompose';
+import { Link } from 'react-router-dom';
 import Api from '../../api';
-import { Button, Shape, Logo } from './components';
+import { Button, Shape, Logo, Avatar } from './components';
 
 
 
-function Header({ children, handleLogout, light  }){
+function Header({ children, light  }){
     return(
         <header className={!light && s.header}>
             <div className={s.widthParams}>
@@ -19,9 +18,7 @@ function Header({ children, handleLogout, light  }){
                     </div>
                     <div className={s.right}> 
                         <Button>Sell</Button>
-                        {Api.Auth.isLoggedIn ? (
-                            <button type="button" onClick={handleLogout}>Logout</button>
-                        ) : (     
+                        {Api.Auth.isLoggedIn ? <Avatar /> : (     
                             <Link className={s.login} to={routes.login}>logIn</Link>                                
                         )}                
                         <Shape light={light} />                     
@@ -37,14 +34,5 @@ Header.propTypes = {
 
 };
 
-const enhancer = compose(
-    withRouter,
-    withHandlers({
-        handleLogout: props => () =>{
-            Api.Auth.logout();
-            props.history.push(routes.home);
-        }
-    })
-)
 
-export default enhancer(Header);
+export default Header;

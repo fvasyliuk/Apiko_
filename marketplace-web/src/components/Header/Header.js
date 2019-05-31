@@ -4,11 +4,12 @@ import s from './Header.module.scss';
 import {routes} from '../../scenes/router';
 import { Link } from 'react-router-dom';
 import Api from '../../api';
-import { Button, Shape, Logo, Avatar } from './components';
+import { LinkSell, Shape, Logo, Avatar } from './components';
 
 
 
-function Header({ children, light  }){
+
+function Header({ children, light, isSell }){
     return(
         <header className={!light && s.header}>
             <div className={s.widthParams}>
@@ -16,8 +17,18 @@ function Header({ children, light  }){
                     <div className={s.left}> 
                         <Logo light={light} className={s.Logo} to={routes.home} />
                     </div>
-                    <div className={s.right}> 
-                        <Button>Sell</Button>
+                    <div className={s.right}>                         
+                        {!isSell 
+                            ? <LinkSell 
+                                to={{
+                                    pathname: routes.addProduct,                                
+                                    state: { modal: true }
+                                }} 
+                            >
+                                Sell
+                            </LinkSell >
+                            : null 
+                        }
                         {Api.Auth.isLoggedIn ? <Avatar /> : (     
                             <Link className={s.login} to={routes.login}>logIn</Link>                                
                         )}                

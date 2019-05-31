@@ -2,10 +2,10 @@ import React from 'react';
 import T from 'prop-types';
 import s from './AddProduct.module.scss';
 import { Formik, Field, Form } from 'formik';
-import { UploadInput, ImgItem } from './components';
+import { UploadInput, ImgItem, LoadingUpdate } from './components';
 
 
-function AddProduct({onSubmit, initialValues, validationSchema, history, uploadImage, imagesList }) {
+function AddProduct({onSubmit, initialValues, validationSchema, history, uploadImage, imagesList, isLoadingImg }) {
 
     let back = e => {
         e.stopPropagation();
@@ -59,7 +59,8 @@ function AddProduct({onSubmit, initialValues, validationSchema, history, uploadI
                                     Photos                           
                                 </label>
                                 <div className={s.containerPhotos}>                                                                                                      
-                                    {imagesList.map((it) => <ImgItem src={it} key={it} />)}                                                                      
+                                    {imagesList.map((it) => <ImgItem src={it} key={it} />)}   
+                                    {isLoadingImg? <LoadingUpdate />:null}                                                                   
                                     { imagesList.length < 7? <UploadInput onChange={uploadImage} /> : null }
                                 </div>
                                 <div className={s.headerFild}>

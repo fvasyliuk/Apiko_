@@ -4,7 +4,10 @@ const urls = {
     login: '/api/auth/login',
     register: '/api/auth/register',
     getViewer: '/api/account/user',
-}
+    productsLatest: '/api/products/latest',
+    add: '/api/products',
+    image: '/api/upload/images',
+};
 
 export const Auth = {
     _token: null,
@@ -59,14 +62,31 @@ export const Auth = {
     _setTokenToAxios(token) {
         axios.defaults.headers.common.Authorization = `Bearer ${token}`;
     }
-}
+};
 
 export const Viewer = {
     get() {
         return axios.get(urls.getViewer);
     }
+};
+
+export const Products = {
+    getLatest() {
+        return axios.get(urls.productsLatest)
+    },
+    add(body) {
+        return axios.post(urls.add, body)
+    },
+};
+
+export const Images = {
+    upload(file) {
+        const fd = new FormData();
+        fd.append('image', file);
+        return axios.post(urls.image, fd);
+    }
 }
 
 export function init() {
     Auth.init();
-}
+};

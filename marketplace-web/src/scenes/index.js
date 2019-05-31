@@ -9,3 +9,5 @@ export { default as Profile } from './Profile/Profile';
 export { default as Search } from './Search/Search';
 export { default as Users } from './Users/Users';
 export { default as Listings } from './Listings/Listings';
+export { default as AddProduct } from './AddProduct/AddProductContainer';
+export { default as AddProductModal } from './AddProduct/AddProductModalContainer';

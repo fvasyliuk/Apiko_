@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { SocketApi } from './';
 
 const urls = {
     login: '/api/auth/login',
@@ -7,6 +8,9 @@ const urls = {
     productsLatest: '/api/products/latest',
     add: '/api/products',
     image: '/api/upload/images',
+    products: '/api/products',
+    users: '/api/users',
+    chats: '/api/chats',
 };
 
 export const Auth = {
@@ -30,6 +34,7 @@ export const Auth = {
             this._token = JSON.parse(token);
             
             this._setTokenToAxios(this._token);
+            SocketApi.init(this._token);
         } catch (err) {
             console.error(err);
         }
@@ -77,6 +82,12 @@ export const Products = {
     add(body) {
         return axios.post(urls.add, body)
     },
+    get(id) {
+        return axios.get(`${urls.products}/${id}`)
+    },
+    getUserProducts(id) {
+        return axios.get(`${urls.users}/${id}/products`)
+    },
 };
 
 export const Images = {
@@ -86,6 +97,24 @@ export const Images = {
         return axios.post(urls.image, fd);
     }
 }
+
+export const Chats = {
+    createChat(productId) {
+        axios.post(`${urls.products}/${productId}/createChat`)
+    },
+    fetch() {
+        return axios.get(urls.chats);
+    }
+}
+
+export const Messages = {
+    sendMessage(chatId, text) {
+        return axios.post(`${urls.chats}/${chatId}/messages`, { text });
+    },
+    fetchMessages(chatId) {
+        return axios.get(`${urls.chats}/${chatId}/messages`);
+    }
+} 
 
 export function init() {
     Auth.init();

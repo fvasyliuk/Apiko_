@@ -22,7 +22,8 @@ header {
     }   
     .right {
         display: flex;  
-        align-items: center;  
+        align-items: center; 
+        margin-right: 20px; 
     }
 }
 .lightTopHeader{
@@ -36,6 +37,7 @@ header {
     .right {
         display: flex;  
         align-items: center;  
+        margin-right: 20px;
     } 
 }
 

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
-import { productsOperations } from '../../modules/products';
+import { productsOperations, productsSelectors } from '../../modules/products';
 import LatestListView from './LatestListView';
 
 const mapStateToProps = (state) => ({
-    list: state.products.latest.items,
+    list: productsSelectors.getLatest(state),
     isLoading: state.products.latest.isLoading,
 });
 
@@ -16,7 +16,10 @@ const enhancer = compose(
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            this.props.fetchLatest();
+            if (this.props.list.length === 0 ) {
+                this.props.fetchLatest();
+            }
+            
         }
     })
 );

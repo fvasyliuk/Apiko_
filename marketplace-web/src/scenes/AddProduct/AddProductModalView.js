@@ -5,7 +5,16 @@ import { Formik, Field, Form } from 'formik';
 import { UploadInput, ImgItem, LoadingUpdate } from './components';
 
 
-function AddProduct({onSubmit, initialValues, validationSchema, history, uploadImage, imagesList, isLoadingImg }) {
+function AddProduct({
+    onSubmit, 
+    initialValues, 
+    validationSchema, 
+    history, 
+    uploadImage, 
+    imagesList, 
+    isLoadingImg,
+    isLoading, 
+}) {
 
     let back = e => {
         e.stopPropagation();
@@ -74,7 +83,7 @@ function AddProduct({onSubmit, initialValues, validationSchema, history, uploadI
                                     name="price"                                                                        
                                     placeholder="For example: 0"                                                                                               
                                 />    
-                                <button type="submit" >Submit</button>              
+                                <button type="submit" >{isLoading ? 'Loading...' : 'Submit'}</button>              
                             </Form>
                         )}
                     }

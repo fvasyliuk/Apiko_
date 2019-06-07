@@ -1,6 +1,8 @@
 import React from 'react';
 import T from 'prop-types';
+import { Link, generatePath } from 'react-router-dom';
 import s from './LatestList.module.scss';
+import { routes } from '../router';
 
 function LatestList({ list, isLoading }) {
     if (isLoading) {
@@ -10,7 +12,7 @@ function LatestList({ list, isLoading }) {
     return (
         <div>
             {list.map(item => (
-                <div key={item.id}>{item.title}</div>
+                <Link to={generatePath(routes.product, { id: item.id })}><div key={item.id}>{item.title}</div></Link>
             ))}
         </div>
     );

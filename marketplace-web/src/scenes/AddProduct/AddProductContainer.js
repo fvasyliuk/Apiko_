@@ -1,17 +1,18 @@
 import { connect } from 'react-redux';
 import { compose, withProps, withHandlers } from 'recompose';
-import { withRouter } from 'react-router-dom';
+import { withRouter, generatePath } from 'react-router-dom';
 import { productsOperations } from '../../modules/products';
 import AddProductView from './AddProductView';
 import { routes } from '../router';
 import * as Yup from 'yup';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({  
     imagesList: state.products.images.items,
     isLoadingImg: state.products.images.isLoading,
+    isLoading: state.products.add.isLoading,
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps = {    
     addProduct: productsOperations.addProduct,
     uploadImg: productsOperations.uploadImage,
 }
@@ -24,8 +25,8 @@ export const enhancer = compose(
         onSubmit: (props) => async (body)=> { 
             const newBody ={...body};
             newBody.photos = props.imagesList;   
-            await props.addProduct(newBody);
-            props.history.push(routes.home);
+            const linkID =await props.addProduct(newBody);            
+            props.history.push(generatePath(routes.product, { id: linkID }));
         },
         uploadImage: (props) => (evt) => props.uploadImg(evt.target.files[0])
     }),

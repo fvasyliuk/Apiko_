@@ -6,7 +6,15 @@ import { Header } from '../../components';
 import { UploadInput, ImgItem, LoadingUpdate } from './components';
 
 
-function AddProduct({onSubmit, initialValues, validationSchema, uploadImage, imagesList, isLoadingImg}) {
+function AddProduct({
+    onSubmit, 
+    initialValues, 
+    validationSchema, 
+    uploadImage, 
+    imagesList, 
+    isLoadingImg,
+    isLoading,
+}) {
 
     return (
         <div>
@@ -71,7 +79,7 @@ function AddProduct({onSubmit, initialValues, validationSchema, uploadImage, ima
                                                                        
                                     placeholder="For example: 0"                                                                                               
                                 />    
-                                <button type="submit" >Submit</button>              
+                                <button type="submit" >{isLoading ? 'Loading...' : 'Submit'}</button>              
                             </Form>
                         )}
                     }

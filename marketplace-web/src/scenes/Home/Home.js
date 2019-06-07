@@ -5,6 +5,8 @@ import s from './Home.module.scss';
 import { Header, SearchBar } from '../../components';
 import { routes } from '../router';
 import LatestList from '../LatestList/LatestListContainer';
+import Product from '../Product/ProductContainer';
+import Users from '../Users/UsersContainer';
 
 
 function Home(){
@@ -16,6 +18,9 @@ function Home(){
 
             <Switch>
                 <Route path={routes.home}  component={LatestList} exact />
+                <Route path={routes.product}  component={Product} />
+                <Route path={routes.users}  component={Users} />
+                <Route  render={()=><div>Not Found 404</div>} />
             </Switch>
         </div>
     );
